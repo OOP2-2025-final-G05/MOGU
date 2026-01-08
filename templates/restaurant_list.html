@@ -81,6 +81,7 @@
                 <th>価格帯</th>
                 <th>評価</th>
                 <th>編集</th>
+                <th>レビュー</th>
             </tr>
         </thead>
         <tbody>
@@ -93,10 +94,21 @@
                 </td>
                 <td>{{ restaurant.address }}</td>
                 <td>{{ restaurant.price if restaurant.price else '-' }}円</td>
-                <td>{{ restaurant.avg_rating }}</td>
+                <td>
+                    {% if restaurant.avg_rating != '-' %}
+                    <span style="color: #ff9900;">★</span> {{ restaurant.avg_rating }}
+                    {% else %}
+                    -
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ url_for('restaurant_list.restaurant_list_edit', restaurant_id=restaurant.id) }}">
                         <button>編集</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ url_for('review.review') }}">
+                        <button>投稿</button>
                     </a>
                 </td>
             </tr>
