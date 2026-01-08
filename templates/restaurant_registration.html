@@ -1,27 +1,168 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>お店登録 - MOGU</title>
-</head>
-<body>
-    <h2>お店登録ページ</h2>
-    <a href="{{ url_for('index') }}">トップに戻る</a>
-    <form action="{{ url_for('res_reg.add') }}" method="post">
-        <label>店名: <input type="text" name="name" required></label><br>
-        <label>住所: <input type="text" name="address" required></label><br>
-        <label>ジャンル: <input type="text" name="genre" required></label><br>
-        <label>価格帯: <select name="price" required>
-            <option value="">選択してください</option>
-            <option value="0-1000">〜1000円</option>
-            <option value="1000-2000">1000〜2000円</option>
-            <option value="2000-3000">2000〜3000円</option>
-            <option value="3000-5000">3000〜5000円</option>
-            <option value="5000-">5000円以上</option>
-        </select>
-        </label><br>
-        <label>営業時間: <input type="text" name="time" required></label><br>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #fff8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            margin: 0;
+        }
 
-        <button type="submit">追加</button>
+        h2 {
+            text-align: center;
+            color: #ff6600;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.15);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #ff6600;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ffe5d1;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #ff6600;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #ff6600;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff4500;
+        }
+
+        .btn-secondary {
+            background-color: #ffe5d1;
+            color: #ff6600;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ffd9c0;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-link a {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>お店登録ページ</h2>
+
+    <div class="form-container">
+        <form action="{{ url_for('res_reg.add') }}" method="post">
+            <div class="form-group">
+                <label for="name">店名</label>
+                <input type="text" id="name" name="name" placeholder="例: モグモグ食堂" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">住所</label>
+                <input type="text" id="address" name="address" placeholder="例: 東京都渋谷区..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="genre">ジャンル</label>
+                <input type="text" id="genre" name="genre" placeholder="例: イタリアン" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">価格帯</label>
+                <select id="price" name="price" required>
+                    <option value="">選択してください</option>
+                    <option value="0-1000">〜1000円</option>
+                    <option value="1000-2000">1000〜2000円</option>
+                    <option value="2000-3000">2000〜3000円</option>
+                    <option value="3000-5000">3000〜5000円</option>
+                    <option value="5000-">5000円以上</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="time">営業時間</label>
+                <input type="text" id="time" name="time" placeholder="例: 11:00〜22:00" required>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">登録する</button>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">キャンセル</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="back-link">
+        <a href="{{ url_for('index') }}">トップに戻る</a>
+    </div>
+
 </body>
+
 </html>
