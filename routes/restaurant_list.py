@@ -1,15 +1,14 @@
 from flask import Blueprint, render_template
-from models.restaurant_list import Restaurant
+from models import Restaurant
 
-restaurant_list_bp = Blueprint(
+list_bp = Blueprint(
     'restaurant_list',
     __name__
 )
 
-@restaurant_list_bp.route('/restaurant_list')
+@list_bp.route('/restaurant_list')
 def restaurant_list():
-    # 仮データなし（空リスト）
-    items = []
+    items = Restaurant.select()
 
     return render_template(
         'restaurant_list.html',
