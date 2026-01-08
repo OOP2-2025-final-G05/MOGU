@@ -27,9 +27,8 @@ def restaurant_list_edit(restaurant_id):
         restaurant.name = request.form.get('name')
         restaurant.address = request.form.get('address')
         restaurant.genre = request.form.get('genre')
-        restaurant.min_price = int(request.form.get('min_price'))
-        restaurant.max_price = int(request.form.get('max_price'))
-        restaurant.opening_hours = request.form.get('opening_hours')
+        restaurant.price = request.form.get('price')
+        restaurant.time = request.form.get('time')
         restaurant.save()
         
         return redirect(url_for('restaurant_list.restaurant_list'))
