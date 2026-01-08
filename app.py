@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from models import initialize_database
+from models import initialize_database, Restaurant
 from routes.restaurant_details import details_bp
 
 app = Flask(__name__)
@@ -21,7 +21,8 @@ def restaurant_registration():
 # お店一覧ページ
 @app.route('/restaurant_list')
 def restaurant_list():
-    return render_template('restaurant_list.html')
+    items = Restaurant.select()
+    return render_template('restaurant_list.html', items=items)
 
 # レビューページ
 @app.route('/review')

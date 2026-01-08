@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, abort
 from models import Restaurant
+from peewee import DoesNotExist
 
 # Blueprintの作成
 details_bp = Blueprint('res_details', __name__, url_prefix='/restaurants')
@@ -9,7 +10,7 @@ def detail(restaurant_id):
     try:
         # IDに基づいてレストランを取得
         restaurant = Restaurant.get_by_id(restaurant_id)
-    except:
+    except DoesNotExist:
         # レストランが見つからない場合は404エラー
         abort(404)
         
