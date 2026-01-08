@@ -6,9 +6,8 @@ class Restaurant(Model):
     name = CharField()          # お店名
     address = CharField()       # お店住所
     genre = CharField()         # ジャンル
-    min_price = IntegerField()  # 価格帯(下限)
-    max_price = IntegerField()  # 価格帯(上限)
-    opening_hours = CharField() # 営業時間
+    price = CharField()         # 価格帯
+    time = CharField() # 営業時間
 
     class Meta:
         database = db

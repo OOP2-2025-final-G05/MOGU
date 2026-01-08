@@ -5,7 +5,23 @@
     <title>お店登録 - MOGU</title>
 </head>
 <body>
-    <h2>お店登録ページ（フォームはまだ未作成）</h2>
+    <h2>お店登録ページ</h2>
     <a href="{{ url_for('index') }}">トップに戻る</a>
+    <form action="{{ url_for('res_reg.add') }}" method="post">
+        <label>店名: <input type="text" name="name" required></label><br>
+        <label>住所: <input type="text" name="address" required></label><br>
+        <label>ジャンル: <input type="text" name="genre" required></label><br>
+        <label>価格帯: <select name="price" required>
+            <option value="">選択してください</option>
+            <option value="0-1000">〜1000円</option>
+            <option value="1000-2000">1000〜2000円</option>
+            <option value="2000-3000">2000〜3000円</option>
+            <option value="3000-5000">3000〜5000円</option>
+            <option value="5000-">5000円以上</option>
+        </select>
+        </label><br>
+        <label>営業時間: <input type="text" name="time" required></label><br>
+
+        <button type="submit">追加</button>
 </body>
 </html>
