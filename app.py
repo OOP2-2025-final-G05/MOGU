@@ -1,12 +1,6 @@
 from flask import Flask, render_template
-from models import initialize_database, Restaurant
-from routes.restaurant_details import details_bp
 
 app = Flask(__name__)
-app.register_blueprint(details_bp)
-
-# データベースの初期化
-initialize_database()
 
 # トップページ
 @app.route('/')
@@ -21,8 +15,7 @@ def restaurant_registration():
 # お店一覧ページ
 @app.route('/restaurant_list')
 def restaurant_list():
-    items = Restaurant.select()
-    return render_template('restaurant_list.html', items=items)
+    return render_template('restaurant_list.html')
 
 # レビューページ
 @app.route('/review')
