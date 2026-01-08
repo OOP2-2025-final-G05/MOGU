@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>店舗詳細</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base-style.css') }}">
+</head>
+<body>
+    <h1>{{ title }} - 詳細</h1>
+    <a href="{{ url_for('index') }}">HOME</a>→<a href="{{ url_for('restaurant_list.restaurant_list') }}">飲食店一覧</a>
+
+    <div>
+        <p><strong>住所:</strong> {{ restaurant.address }}</p>
+        <p><strong>ジャンル:</strong> {{ restaurant.genre }}</p>
+        <p><strong>価格帯:</strong> {{ restaurant.min_price }}円 〜 {{ restaurant.max_price }}円</p>
+        <p><strong>営業時間:</strong> {{ restaurant.opening_hours }}</p>
+    </div>
+</body>
+</html>

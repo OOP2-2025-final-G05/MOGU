@@ -2,10 +2,104 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>レビュー - MOGU</title>
+    <title>レビュー投稿 - MOGU</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .star-rating {
+            direction: rtl;
+            display: inline-flex;
+            font-size: 30px;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .star-rating input:checked ~ label {
+            color: #ff9900;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #ff9900;
+        }
+    </style>
 </head>
 <body>
-    <h2>レビュー登録ページ（フォームはまだ未作成）</h2>
-    <a href="{{ url_for('index') }}">トップに戻る</a>
+
+<h1>レビュー投稿</h1>
+
+<form method="post">
+
+    <!-- 店舗選択 -->
+    <p>
+        お店：
+        <select name="restaurant_id" required>
+            {% for restaurant in restaurants %}
+                <option value="{{ restaurant.id }}">
+                    {{ restaurant.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <!-- 星評価 -->
+    <p>評価：</p>
+    <div class="star-rating">
+        <input type="radio" id="star5" name="rating" value="5" required>
+        <label for="star5">★</label>
+
+        <input type="radio" id="star4" name="rating" value="4">
+        <label for="star4">★</label>
+
+        <input type="radio" id="star3" name="rating" value="3">
+        <label for="star3">★</label>
+
+        <input type="radio" id="star2" name="rating" value="2">
+        <label for="star2">★</label>
+
+        <input type="radio" id="star1" name="rating" value="1">
+        <label for="star1">★</label>
+    </div>
+
+    <!-- コメント -->
+    <p>
+        コメント：<br>
+        <textarea name="comment" rows="4" cols="40" required></textarea>
+    </p>
+
+    <!-- 年齢 -->
+    <p>
+        年齢：
+        <input type="number" name="age" min="1" required>
+    </p>
+
+    <!-- 性別 -->
+    <p>
+        性別：
+        <select name="gender" required>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="その他">その他</option>
+        </select>
+    </p>
+
+    <p>
+        <button type="submit">投稿する</button>
+    </p>
+
+</form>
+
+<a href="{{ url_for('index') }}">トップに戻る</a>
+
 </body>
 </html>
