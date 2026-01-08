@@ -2,17 +2,59 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>レビュー投稿 - MOGU</title>
+    <title>レビュー投稿 - MOGUMOGU</title>
+
     <style>
         body {
             font-family: sans-serif;
-            padding: 20px;
+            background-color: #fff8f0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            width: 380px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6600;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select, textarea, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        /* ⭐ 星評価 */
         .star-rating {
             direction: rtl;
-            display: inline-flex;
-            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            font-size: 32px;
+            margin: 10px 0;
         }
 
         .star-rating input {
@@ -32,17 +74,47 @@
         .star-rating label:hover ~ label {
             color: #ff9900;
         }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff6600;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff4500;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ff6600;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
-<h1>レビュー投稿</h1>
+<div class="container">
+    <h1>レビュー投稿</h1>
 
-<form method="post">
+    <form method="post">
 
-    <!-- 店舗選択 -->
-    <p>
-        お店：
+        <label>お店</label>
         <select name="restaurant_id" required>
             {% for restaurant in restaurants %}
                 <option value="{{ restaurant.id }}">
@@ -50,56 +122,43 @@
                 </option>
             {% endfor %}
         </select>
-    </p>
 
-    <!-- 星評価 -->
-    <p>評価：</p>
-    <div class="star-rating">
-        <input type="radio" id="star5" name="rating" value="5" required>
-        <label for="star5">★</label>
+        <label>評価</label>
+        <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5" required>
+            <label for="star5">★</label>
 
-        <input type="radio" id="star4" name="rating" value="4">
-        <label for="star4">★</label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4">★</label>
 
-        <input type="radio" id="star3" name="rating" value="3">
-        <label for="star3">★</label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3">★</label>
 
-        <input type="radio" id="star2" name="rating" value="2">
-        <label for="star2">★</label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2">★</label>
 
-        <input type="radio" id="star1" name="rating" value="1">
-        <label for="star1">★</label>
-    </div>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1">★</label>
+        </div>
 
-    <!-- コメント -->
-    <p>
-        コメント：<br>
-        <textarea name="comment" rows="4" cols="40" required></textarea>
-    </p>
+        <label>コメント</label>
+        <textarea name="comment" rows="4" required></textarea>
 
-    <!-- 年齢 -->
-    <p>
-        年齢：
+        <label>年齢</label>
         <input type="number" name="age" min="1" required>
-    </p>
 
-    <!-- 性別 -->
-    <p>
-        性別：
+        <label>性別</label>
         <select name="gender" required>
             <option value="男性">男性</option>
             <option value="女性">女性</option>
             <option value="その他">その他</option>
         </select>
-    </p>
 
-    <p>
         <button type="submit">投稿する</button>
-    </p>
+    </form>
 
-</form>
-
-<a href="{{ url_for('index') }}">トップに戻る</a>
+    <a class="back" href="{{ url_for('index') }}">トップに戻る</a>
+</div>
 
 </body>
 </html>
