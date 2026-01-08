@@ -92,7 +92,7 @@
                     </a>
                 </td>
                 <td>{{ restaurant.address }}</td>
-                <td>{{ restaurant.min_price }}円〜{{ restaurant.max_price }}円</td>
+                <td>{{ restaurant.price if restaurant.price else '-' }}円</td>
                 <td>{{ restaurant.avg_rating }}</td>
                 <td>
                     <a href="{{ url_for('restaurant_list.restaurant_list_edit', restaurant_id=restaurant.id) }}">
