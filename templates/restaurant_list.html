@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>お店一覧 - MOGU</title>
@@ -22,7 +23,8 @@
             background-color: white;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ccc;
             padding: 12px;
             text-align: left;
@@ -66,44 +68,46 @@
         }
     </style>
 </head>
+
 <body>
 
-<h2>お店一覧</h2>
+    <h2>お店一覧</h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>店名</th>
-            <th>住所</th>
-            <th>価格帯</th>
-            <th>評価</th>
-            <th>編集</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for restaurant in items %}
-        <tr>
-            <td>
-                <a href="{{ url_for('restaurant_details', restaurant_id=restaurant.id) }}">
-                    {{ restaurant.name }}
-                </a>
-            </td>
-            <td>{{ restaurant.address }}</td>
-            <td>{{ restaurant.min_price }}円〜{{ restaurant.max_price }}円</td>
-            <td>{{ restaurant.avg_rating }}</td>
-            <td>
-                <a href="{{ url_for('restaurant_list_edit', restaurant_id=restaurant.id) }}">
-                    <button>編集</button>
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>店名</th>
+                <th>住所</th>
+                <th>価格帯</th>
+                <th>評価</th>
+                <th>編集</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for restaurant in items %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('res_details.detail', restaurant_id=restaurant.id) }}">
+                        {{ restaurant.name }}
+                    </a>
+                </td>
+                <td>{{ restaurant.address }}</td>
+                <td>{{ restaurant.min_price }}円〜{{ restaurant.max_price }}円</td>
+                <td>{{ restaurant.avg_rating }}</td>
+                <td>
+                    <a href="#">{# TODO: implement edit route #}
+                        <button>編集</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<div class="back">
-    <a href="{{ url_for('index') }}">トップに戻る</a>
-</div>
+    <div class="back">
+        <a href="{{ url_for('index') }}">トップに戻る</a>
+    </div>
 
 </body>
+
 </html>
