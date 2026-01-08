@@ -1,6 +1,12 @@
 from flask import Flask, render_template
+from models import initialize_database
+from routes.restaurant_details import details_bp
 
 app = Flask(__name__)
+app.register_blueprint(details_bp)
+
+# データベースの初期化
+initialize_database()
 
 # トップページ
 @app.route('/')
