@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from models import initialize_database, Restaurant
+from routes.restaurant_registration import reg_bp 
 from routes.restaurant_details import details_bp
 from routes.restaurant_list import list_bp
 
@@ -9,6 +10,11 @@ app.register_blueprint(list_bp)
 
 # データベースの初期化
 initialize_database()
+
+# データベースの初期化
+initialize_database()
+
+app.register_blueprint(reg_bp)
 
 # トップページ
 @app.route('/')
