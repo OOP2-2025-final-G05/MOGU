@@ -9,4 +9,13 @@ def restaurant_details(restaurant_id):
     restaurant = Restaurant.get_or_none(Restaurant.id == restaurant_id)
     if not restaurant:
         abort(404)
-    return render_template('restaurant_details.html', restaurant=restaurant, title=restaurant.name)
+    
+    # 追加：このお店に関連するレビューをすべて取得
+    reviews = Review.select().where(Review.restaurant == restaurant_id).order_by(Review.created_at.desc())
+    
+    return render_template(
+        'restaurant_details.html', 
+        restaurant=restaurant, 
+        title=restaurant.name,
+        reviews=reviews  # テンプレートにレビューを渡す
+    )
