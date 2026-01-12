@@ -6,27 +6,27 @@ MOGUMOGUレビューは、ユーザーが訪れた飲食店や気になった飲
 
 ## トップページ
 > 「お店登録・お店一覧・レビュー」ボタンが表示。ボタンをクリックすると、それぞれのページに遷移する。
-![](top_image.jpeg)
+![](top_image.png)
  
 ## お店登録画面
 > 「お店名、住所、ジャンル、価格帯、営業時間」を登録できる。
-![](restaurant_registration_image.jpeg)
+![](restaurant_registration_image.png)
  
 ## お店一覧画面
 > 「お店名、住所、ジャンル、価格帯、評価、編集ボタン」を表示。お店の行を押したら「お店詳細」に遷移。編集ボタンを押すと「編集」画面に遷移する。
-![](restaurant_list_image.jpeg)
+![](restaurant_list_image.png)
  
 ## お店詳細画面
 > 「お店名、住所、ジャンル、価格帯、評価、営業時間」「コメント、評価、年齢、性別」を表示。スクロールして複数のレビューを閲覧できる。
-![](restaurant_details_image.jpeg)
+![](restaurant_details_image.png)
  
 ## 編集画面
 > お店の登録情報を編集。
-![](restaurant_edit_image.jpeg)
+![](restaurant_edit_image.png)
  
 ## レビュー画面
 > 「お店名、評価、年齢、性別、コメント」を登録。
-![](review_image.jpeg)
+![](review_image.png)
 
 ### お問い合わせ先
 
