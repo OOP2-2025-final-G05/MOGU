@@ -36,7 +36,8 @@
             margin-top: 15px;
             margin-bottom: 5px;
             font-weight: bold;
-        }
+            color: #ff6600;   /* タイトルと同じオレンジ */
+    }
 
         select, textarea, input[type="number"] {
             width: 100%;
@@ -115,6 +116,15 @@
         .btn-back:hover {
             background-color: #ffd9c0;
         }
+
+        .fixed-select {
+        pointer-events: none;   /* クリック不可 */
+        background-color: #fff; /* 白のまま */
+        color: #000;            /* 文字を黒 */
+        appearance: none;      /* 矢印消す */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
     </style>
 </head>
 <body>
@@ -124,15 +134,22 @@
 
     <form method="post">
 
-       <label>お店</label>
-        <select name="restaurant_id" required>
-                {% for restaurant in restaurants %}
+        <label>お店</label>
+
+<select name="restaurant_id" class="fixed-select">
+    {% for restaurant in restaurants %}
         <option value="{{ restaurant.id }}"
-            {% if selected_id and restaurant.id == selected_id|int %}selected{% endif %}>
+            {% if restaurant.id|string == selected_id %}
+                selected
+            {% endif %}
+        >
             {{ restaurant.name }}
         </option>
     {% endfor %}
 </select>
+
+<input type="hidden" name="restaurant_id" value="{{ selected_id }}">
+
 
         <label>評価</label>
         <div class="star-rating">
