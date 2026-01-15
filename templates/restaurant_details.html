@@ -35,7 +35,9 @@
         .review-stars { color: #ff9900; font-weight: bold; margin-bottom: 10px; }
         .review-comment { color: #333; white-space: pre-wrap; }
 
+
         /* ===== 評価分布 ===== */
+        .reviews-evaluation { color: #ff6600; border-left: 5px solid #ff6600; padding-left: 10px; margin-bottom: 20px; }
         .rating-summary {
             background: white;
             padding: 20px 25px;
@@ -85,6 +87,26 @@
             color: #777;
         }
 
+        /* ===== 平均評価 ===== */
+        .avg-rating {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .avg-score {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff6600;
+            line-height: 1;
+        }
+
+        .avg-label {
+            font-size: 14px;
+            color: #999;
+        }
+
     </style>
 </head>
 
@@ -120,6 +142,7 @@
     </div>
 
     <div class="reviews-section">
+        <h2 class="reviews-evaluation">お店の評価</h2>
         {% set total = reviews|length %}
         {% if total > 0 %}
         {% set counts = {
@@ -130,7 +153,20 @@
             1: reviews|selectattr("rating", "equalto", 1)|list|length
         } %}
 
+        {% set avg =
+            (
+                5 * counts[5] +
+                4 * counts[4] +
+                3 * counts[3] +
+                2 * counts[2] +
+                1 * counts[1]
+            ) / total
+        %}
         <div class="rating-summary">
+            <div class="avg-rating">
+            <div class="avg-score">平均 {{ avg | round(1) }}</div>
+            <div class="avg-label">/ 5.0</div>
+            </div>
             <h3 class="rating-title">評価の分布</h3>
 
             {% for star in [5,4,3,2,1] %}
