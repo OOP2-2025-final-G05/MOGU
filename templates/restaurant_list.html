@@ -8,64 +8,85 @@
         body {
             font-family: sans-serif;
             background-color: #fff8f0;
+            margin: 0;
+            padding: 20px;
         }
 
         h2 {
             text-align: center;
             color: #ff6600;
-            margin-top: 30px;
         }
 
-        table {
-            border-collapse: collapse;
-            width: 85%;
+        /* 全体を包むコンテナ */
+        .list-container {
+            max-width: 900px;
             margin: 30px auto;
+        }
+
+        /* 1行分の設定 */
+        .item-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        /* 左側の情報エリア（白いボックス） */
+        .item-data-card {
+            flex: 1; /* 残りの幅をすべて占める */
+            display: flex;
             background-color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            align-items: center;
         }
 
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 12px;
-            text-align: left;
+        /* 右側のボタンエリア（枠の外側） */
+        .item-actions {
+            display: flex;
+            gap: 10px; /* ボタン同士の間隔 */
+            margin-left: 20px; /* リストとの間に隙間を作る */
+            flex-shrink: 0; /* ボタンエリアが潰れないように固定 */
         }
 
-        th {
-            background-color: #ff6600;
-            color: white;
-        }
-
-        tr:hover {
-            background-color: #ffe5d1;
-        }
+        /* 各データ項目のスタイル */
+        .info-name { width: 25%; font-weight: bold; }
+        .info-address { width: 40%; font-size: 0.9em; color: #666; }
+        .info-price { width: 15%; text-align: right; }
+        .info-rating { width: 20%; text-align: center; }
 
         a {
             color: #ff6600;
             text-decoration: none;
-            font-weight: bold;
         }
 
         a:hover {
             text-decoration: underline;
         }
 
-        button {
-            padding: 6px 12px;
-            background-color: #ff6600;
+        /* ボタンの共通スタイル */
+        .btn {
+            padding: 10px 18px;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        button:hover {
-            background-color: #ff4500;
-        }
+        .btn-edit { background-color: #999; } 
+        .btn-edit:hover { background-color: #777; }
 
-        .back {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+        .btn-review { background-color: #ff6600; }
+        .btn-review:hover { background-color: #ff4500; }
+
+        .back { text-align: center; margin-top: 40px; }
     </style>
 </head>
 
@@ -73,48 +94,33 @@
 
     <h2>お店一覧</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>店名</th>
-                <th>住所</th>
-                <th>価格帯</th>
-                <th>評価</th>
-                <th>編集</th>
-                <th>レビュー</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for restaurant in items %}
-            <tr>
-                <td>
+    <div class="list-container">
+        {% for restaurant in items %}
+        <div class="item-wrapper">
+            <div class="item-data-card">
+                <div class="info-name">
                     <a href="{{ url_for('res_details.restaurant_details', restaurant_id=restaurant.id) }}">
                         {{ restaurant.name }}
                     </a>
-                </td>
-                <td>{{ restaurant.address }}</td>
-                <td>{{ restaurant.price if restaurant.price else '-' }}円</td>
-                <td>
+                </div>
+                <div class="info-address">{{ restaurant.address }}</div>
+                <div class="info-price">{{ restaurant.price if restaurant.price else '-' }}円</div>
+                <div class="info-rating">
                     {% if restaurant.avg_rating != '-' %}
                     <span style="color: #ff9900;">★</span> {{ restaurant.avg_rating }}
                     {% else %}
                     -
                     {% endif %}
-                </td>
-                <td>
-                    <a href="{{ url_for('restaurant_list.restaurant_list_edit', restaurant_id=restaurant.id) }}">
-                        <button>編集</button>
-                    </a>
-                </td>
-                <td>
-                    <a href="{{ url_for('review.review') }}">
-                        <button>投稿</button>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                </div>
+            </div>
+
+            <div class="item-actions">
+                <a href="{{ url_for('restaurant_list.restaurant_list_edit', restaurant_id=restaurant.id) }}" class="btn btn-edit">編集</a>
+                <a href="{{ url_for('review.review') }}" class="btn btn-review">レビュー</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
     <div class="back">
         <a href="{{ url_for('index') }}">トップに戻る</a>

@@ -5,13 +5,11 @@
     <meta charset="UTF-8">
     <title>店舗詳細 - MOGU</title>
     <style>
-        /* 元のスタイルを維持 */
+        /* 全体のスタイル */
         body { font-family: sans-serif; background-color: #fff8f0; margin: 0; padding: 30px 20px; }
-        h1 { text-align: center; color: #ff6600; margin-bottom: 20px; }
-        .breadcrumb { text-align: center; margin-bottom: 30px; }
-        .breadcrumb a { color: #ff6600; text-decoration: none; font-weight: bold; }
-        .breadcrumb a:hover { text-decoration: underline; }
-        .breadcrumb span { color: #999; }
+        h1 { text-align: center; color: #ff6600; margin-bottom: 40px; }
+        
+        /* 詳細情報のコンテナ */
         .details-container {
             background-color: white; padding: 30px 40px; border-radius: 12px;
             box-shadow: 0 4px 15px rgba(255, 102, 0, 0.15); max-width: 600px; margin: 0 auto;
@@ -20,18 +18,17 @@
         .detail-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .detail-label { color: #ff6600; font-weight: bold; font-size: 14px; margin-bottom: 5px; }
         .detail-value { color: #333; font-size: 16px; }
+        
+        /* ボタンエリア */
         .btn-group { display: flex; gap: 15px; margin-top: 30px; justify-content: center; }
         .btn { padding: 12px 25px; text-align: center; text-decoration: none; border: none; border-radius: 8px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.3s; }
         .btn-primary { background-color: #ff6600; color: white; }
         .btn-primary:hover { background-color: #ff4500; }
         .btn-secondary { background-color: #ffe5d1; color: #ff6600; }
         .btn-secondary:hover { background-color: #ffd9c0; }
-        .back-link { text-align: center; margin-top: 30px; }
-        .back-link a { color: #ff6600; text-decoration: none; font-weight: bold; }
-        .back-link a:hover { text-decoration: underline; }
 
-        /* 追加：レビュー表示用のスタイル */
-        .reviews-section { max-width: 600px; margin: 40px auto 0; }
+        /* レビュー表示用のスタイル */
+        .reviews-section { max-width: 600px; margin: 40px auto 40px; }
         .reviews-title { color: #ff6600; border-left: 5px solid #ff6600; padding-left: 10px; margin-bottom: 20px; }
         .review-card { background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .review-header { display: flex; justify-content: space-between; font-size: 13px; color: #777; margin-bottom: 10px; }
@@ -42,14 +39,6 @@
 
 <body>
     <h1>{{ title }} - 詳細</h1>
-
-    <div class="breadcrumb">
-        <a href="{{ url_for('index') }}">HOME</a>
-        <span>→</span>
-        <a href="{{ url_for('restaurant_list.restaurant_list') }}">飲食店一覧</a>
-        <span>→</span>
-        <span>{{ title }}</span>
-    </div>
 
     <div class="details-container">
         <div class="detail-item">
@@ -97,9 +86,6 @@
         {% endif %}
     </div>
 
-    <div class="back-link">
-        <a href="{{ url_for('index') }}">トップに戻る</a>
-    </div>
 </body>
 
 </html>

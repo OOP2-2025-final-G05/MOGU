@@ -9,17 +9,19 @@
             font-family: sans-serif;
             background-color: #fff8f0;
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .container {
             background: #ffffff;
             padding: 40px;
             border-radius: 16px;
-            width: 380px;
+            width: 400px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
@@ -48,7 +50,6 @@
             resize: none;
         }
 
-        /* ⭐ 星評価 */
         .star-rating {
             direction: rtl;
             display: flex;
@@ -75,35 +76,44 @@
             color: #ff9900;
         }
 
-        button {
-            width: 100%;
+        /* ボタンエリアの設定 */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1; /* ボタンを同じ幅にする */
             padding: 14px;
-            margin-top: 25px;
             border: none;
             border-radius: 10px;
-            background-color: #ff6600;
-            color: white;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
         }
 
-        button:hover {
+        .btn-submit {
+            background-color: #ff6600;
+            color: white;
+        }
+
+        .btn-submit:hover {
             background-color: #ff4500;
         }
 
-        .back {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            text-decoration: none;
+        .btn-back {
+            background-color: #ffe5d1;
             color: #ff6600;
-            font-weight: bold;
         }
 
-        .back:hover {
-            text-decoration: underline;
+        .btn-back:hover {
+            background-color: #ffd9c0;
         }
     </style>
 </head>
@@ -154,10 +164,11 @@
             <option value="その他">その他</option>
         </select>
 
-        <button type="submit">投稿する</button>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-submit">投稿する</button>
+            <a href="{{ url_for('restaurant_list.restaurant_list') }}" class="btn btn-back">一覧に戻る</a>
+        </div>
     </form>
-
-    <a class="back" href="{{ url_for('index') }}">トップに戻る</a>
 </div>
 
 </body>
