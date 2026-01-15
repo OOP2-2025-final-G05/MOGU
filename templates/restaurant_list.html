@@ -17,10 +17,87 @@
             color: #ff6600;
         }
 
+        /* ===== フィルター ===== */
+        .filter-container {
+            max-width: 900px;
+            margin: 20px auto 10px;
+            background: white;
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .filter-form {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-form label {
+            font-weight: bold;
+            color: #ff6600;
+            font-size: 14px;
+        }
+
+        .filter-form select,
+        .filter-form input[type="text"] {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 2px solid #ffe5d1;
+            outline: none;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        .filter-form select:focus,
+        .filter-form input[type="text"]:focus {
+            border-color: #ff6600;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-filter {
+            padding: 9px 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            background-color: #ff6600;
+            color: white;
+            transition: 0.2s;
+        }
+
+        .btn-filter:hover {
+            background-color: #ff4500;
+        }
+
+        .btn-clear {
+            padding: 9px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            background-color: #ffe5d1;
+            color: #ff6600;
+            transition: 0.2s;
+            display: inline-block;
+        }
+
+        .btn-clear:hover {
+            background-color: #ffd9c0;
+        }
+
         /* 全体を包むコンテナ */
         .list-container {
             max-width: 900px;
-            margin: 30px auto;
+            margin: 20px auto 30px;
         }
 
         /* 1行分の設定 */
@@ -32,7 +109,7 @@
 
         /* 左側の情報エリア（白いボックス） */
         .item-data-card {
-            flex: 1; /* 残りの幅をすべて占める */
+            flex: 1;
             display: flex;
             background-color: white;
             padding: 15px 20px;
@@ -45,15 +122,15 @@
         /* 右側のボタンエリア（枠の外側） */
         .item-actions {
             display: flex;
-            gap: 10px; /* ボタン同士の間隔 */
-            margin-left: 20px; /* リストとの間に隙間を作る */
-            flex-shrink: 0; /* ボタンエリアが潰れないように固定 */
+            gap: 10px;
+            margin-left: 20px;
+            flex-shrink: 0;
         }
 
         /* 各データ項目のスタイル */
         .info-name { width: 25%; font-weight: bold; }
         .info-address { width: 40%; font-size: 0.9em; color: #666; }
-        .info-price { width: 15%; text-align: right; }
+        .info-genre { width: 15%; font-size: 0.9em; color: #666; text-align: center; }
         .info-rating { width: 20%; text-align: center; }
 
         a {
@@ -80,21 +157,61 @@
             display: inline-block;
         }
 
-        .btn-edit { background-color: #999; } 
+        .btn-edit { background-color: #999; }
         .btn-edit:hover { background-color: #777; }
 
         .btn-review { background-color: #ff6600; }
         .btn-review:hover { background-color: #ff4500; }
 
         .back { text-align: center; margin-top: 40px; }
+
+        .empty {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 18px 20px;
+            text-align: center;
+            color: #666;
+        }
     </style>
 </head>
 
 <body>
 
-    <h2>お店一覧</h2>
+<h2>お店一覧</h2>
 
-    <div class="list-container">
+<!-- ===== フィルターUI（GET）===== -->
+<div class="filter-container">
+    <form method="get" action="{{ url_for('restaurant_list.restaurant_list') }}" class="filter-form">
+        <label>
+            ★
+            <select name="min_rating">
+                <option value="">指定なし</option>
+                {% for i in range(1, 6) %}
+                <option value="{{ i }}" {% if min_rating == i %}selected{% endif %}>{{ i }}以上</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            住所
+            <input type="text" name="address" placeholder="例：東京"
+                   value="{{ address if address }}">
+        </label>
+
+        <div class="filter-actions">
+            <button type="submit" class="btn-filter">絞り込む</button>
+            <a href="{{ url_for('restaurant_list.restaurant_list') }}" class="btn-clear">解除</a>
+        </div>
+    </form>
+</div>
+
+<div class="list-container">
+    {% if items|length == 0 %}
+        <div class="empty">条件に一致するお店がありません</div>
+    {% else %}
         {% for restaurant in items %}
         <div class="item-wrapper">
             <div class="item-data-card">
@@ -107,9 +224,9 @@
                 <div class="info-genre">{{ restaurant.genre }}</div>
                 <div class="info-rating">
                     {% if restaurant.avg_rating != '-' %}
-                    <span style="color: #ff9900;">★</span> {{ restaurant.avg_rating }}
+                        <span style="color: #ff9900;">★</span> {{ restaurant.avg_rating }}
                     {% else %}
-                    -
+                        -
                     {% endif %}
                 </div>
             </div>
@@ -120,12 +237,12 @@
             </div>
         </div>
         {% endfor %}
-    </div>
+    {% endif %}
+</div>
 
-    <div class="back">
-        <a href="{{ url_for('index') }}">トップに戻る</a>
-    </div>
+<div class="back">
+    <a href="{{ url_for('index') }}">トップに戻る</a>
+</div>
 
 </body>
-
 </html>
