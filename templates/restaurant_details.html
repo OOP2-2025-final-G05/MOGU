@@ -187,7 +187,7 @@
             {% for review in reviews %}
             <div class="review-card">
                 <div class="review-header">
-                    <span>{{ review.age }}代 / {{ review.gender }}</span>
+                    <span>{{ review.age }}歳 / {{ review.gender }}</span>
                     <span>{{ review.created_at.strftime('%Y/%m/%d') }}</span>
                 </div>
                 <div class="review-stars">評価: {{ review.rating }} / 5</div>
