@@ -116,7 +116,7 @@
 
             <div class="item-actions">
                 <a href="{{ url_for('restaurant_list.restaurant_list_edit', restaurant_id=restaurant.id) }}" class="btn btn-edit">編集</a>
-                <a href="{{ url_for('review.review') }}" class="btn btn-review">レビュー</a>
+                <a href="{{ url_for('review.review', restaurant_id=restaurant.id) }}" class="btn btn-review">レビュー</a>
             </div>
         </div>
         {% endfor %}
