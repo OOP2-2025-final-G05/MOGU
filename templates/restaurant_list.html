@@ -104,7 +104,7 @@
                     </a>
                 </div>
                 <div class="info-address">{{ restaurant.address }}</div>
-                <div class="info-price">{{ restaurant.price if restaurant.price else '-' }}円</div>
+                <div class="info-genre">{{ restaurant.genre }}</div>
                 <div class="info-rating">
                     {% if restaurant.avg_rating != '-' %}
                     <span style="color: #ff9900;">★</span> {{ restaurant.avg_rating }}
